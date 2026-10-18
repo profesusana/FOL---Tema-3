@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Interactivo FOL - Tema 3: Las Medidas de Prevención</title>
+    <!-- Tailwind CSS para diseño moderno y visual -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- CABECERA -->
+    <header class="w-full py-6 px-6 bg-slate-900/60 backdrop-blur-md border-b border-slate-800 shadow-lg sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-indigo-400 to-teal-400 bg-clip-text text-transparent">
+                    Formación y Orientación Laboral
+                </h1>
+                <p class="text-xs text-slate-400">Tema 3: Las Medidas de Prevención | Elaboración de Susana Felipe Ortiz, con ayuda de la IA</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="restartQuiz()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-semibold rounded-xl transition shadow flex items-center gap-1.5 cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    Volver al Inicio
+                </button>
+                <div id="badge-container" class="hidden">
+                    <span class="px-3 py-1.5 bg-indigo-950/80 border border-indigo-500/30 text-indigo-300 text-xs font-medium rounded-full shadow-inner" id="score-badge">
+                        Puntuación: 0 / 0
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="w-full max-w-3xl mx-auto px-4 py-8 flex-grow flex items-center justify-center">
+
+        <!-- PANTALLA 1: BIENVENIDA -->
+        <div id="screen-welcome" class="w-full bg-slate-800/80 backdrop-blur-xl border border-slate-700/60 rounded-3xl p-8 sm:p-10 shadow-2xl text-center transform transition-all">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 mb-6 shadow-lg">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">¡Pon a prueba tus conocimientos!</h2>
+            <p class="text-slate-300 text-sm sm:text-base mb-6 max-w-xl mx-auto leading-relaxed">
+                Repasa el <strong>Tema 3 (Las Medidas de Prevención)</strong> con este test interactivo definitivo de 100 preguntas basadas íntegramente en los apuntes oficiales de FOL.
+            </p>
+
+            <div class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 mb-8 max-w-md mx-auto text-left text-xs sm:text-sm text-slate-300 space-y-2">
+                <div class="flex items-center gap-2 text-indigo-400 font-semibold mb-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Elige el modo de test:
+                </div>
+                <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-slate-800 transition">
+                    <input type="radio" name="mode" value="15" class="text-indigo-600 focus:ring-indigo-500">
+                    <span><strong>Test Corto:</strong> 15 preguntas aleatorias</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-slate-800 transition">
+                    <input type="radio" name="mode" value="30" class="text-indigo-600 focus:ring-indigo-500">
+                    <span><strong>Test Medio:</strong> 30 preguntas aleatorias</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-slate-800 transition">
+                    <input type="radio" name="mode" value="100" checked class="text-indigo-600 focus:ring-indigo-500">
+                    <span><strong>Examen Completo:</strong> Las 100 preguntas del tema</span>
+                </label>
+            </div>
+
+            <button onclick="startQuiz()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-600 to-teal-500 hover:from-indigo-500 hover:to-teal-400 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/30 transform transition active:scale-95 cursor-pointer">
+                Comenzar Test 🚀
+            </button>
+            
+            <p class="text-xs text-slate-400 mt-6">Elaboración de Susana Felipe Ortiz, con ayuda de la IA</p>
+        </div>
+
+        <!-- PANTALLA 2: PREGUNTA INTERACTIVA -->
+        <div id="screen-quiz" class="w-full bg-slate-800/80 backdrop-blur-xl border border-slate-700/60 rounded-3xl p-6 sm:p-8 shadow-2xl hidden">
+            <!-- Barra de progreso -->
+            <div class="mb-6">
+                <div class="flex justify-between text-xs font-semibold text-slate-400 mb-2">
+                    <span id="question-counter">Pregunta 1 de 100</span>
+                    <span id="progress-percent">1%</span>
+                </div>
+                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-700">
+                    <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 to-teal-400 h-full transition-all duration-300" style="width: 1%;"></div>
+                </div>
+            </div>
+
+            <!-- Enunciado -->
+            <h3 id="question-text" class="text-lg sm:text-xl font-bold text-white mb-6 leading-snug">
+                <!-- Aquí se inyecta la pregunta -->
+            </h3>
+
+            <!-- Opciones -->
+            <div id="options-container" class="space-y-3 mb-6">
+                <!-- Se inyectan las opciones dinámicamente -->
+            </div>
+
+            <!-- Feedback / Explicación -->
+            <div id="feedback-box" class="hidden p-4 rounded-xl mb-6 text-sm border">
+                <!-- Se inyecta retroalimentación -->
+            </div>
+
+            <!-- Botón Siguiente -->
+            <div class="flex justify-end">
+                <button id="btn-next" onclick="nextQuestion()" class="hidden px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-md transition cursor-pointer">
+                    Siguiente Pregunta →
+                </button>
+            </div>
+        </div>
+
+        <!-- PANTALLA 3: RESULTADOS -->
+        <div id="screen-results" class="w-full bg-slate-800/80 backdrop-blur-xl border border-slate-700/60 rounded-3xl p-8 sm:p-10 shadow-2xl text-center hidden">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-teal-500/20 text-teal-400 border border-teal-500/30 mb-6 shadow-lg">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">¡Test Completado!</h2>
+            <p id="result-message" class="text-slate-300 text-base mb-6">Has demostrado un gran dominio del Tema 3.</p>
+
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-2xl p-6 max-w-sm mx-auto mb-8 shadow-inner">
+                <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Puntuación Final</div>
+                <div id="final-score" class="text-4xl sm:text-5xl font-black bg-gradient-to-r from-indigo-400 to-teal-400 bg-clip-text text-transparent">
+                    0 / 100
+                </div>
+                <div id="final-percentage" class="text-sm font-medium text-slate-400 mt-2">0% de aciertos</div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="restartQuiz()" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition cursor-pointer">
+                    Volver a Intentarlo 🔄
+                </button>
+            </div>
+            
+            <p class="text-xs text-slate-400 mt-6">Elaboración de Susana Felipe Ortiz, con ayuda de la IA</p>
+        </div>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="w-full py-4 px-6 text-center text-xs text-slate-500 border-t border-slate-800 bg-slate-900/40">
+        Formación y Orientación Laboral • Elaboración de Susana Felipe Ortiz, con ayuda de la IA
+    </footer>
+
+    <!-- SCRIPT DE FUNCIONAMIENTO Y BANCO DE 100 PREGUNTAS (TEMA 3) -->
+    <script>
+        const fullQuestionBank = [
+            // 1
+            {
+                q: "¿Qué obligación impone al empresario el artículo 14.2 de la Ley de Prevención de Riesgos Laborales?",
+                options: [
+                    "Proteger a los trabajadores frente a los riesgos laborales garantizando su seguridad y salud mediante la integración de la actividad preventiva.",
+                    "Contratar un seguro privado de vida obligatorio para cada empleado del sector.",
+                    "Permitir que los trabajadores elijan libremente sus propios turnos de trabajo.",
+                    "Sustituir la mutua de accidentes cada dos años."
+                ],
+                correct: 0,
+                exp: "El art. 14.2 de la LPRL impone al empresario proteger a los trabajadores integrando la actividad preventiva en la empresa[cite: 37]."
+            },
+            // 2
+            {
+                q: "¿En qué consiste la 'integración de la prevención en la empresa'?",
+                options: [
+                    "En aplicar criterios de prevención en todas las decisiones de los niveles jerárquicos y actividades desarrolladas.",
+                    "En externalizar el 100% de las tareas peligrosas a empresas subcontratadas.",
+                    "En unificar las nóminas y los seguros sociales en una sola ventanilla.",
+                    "En realizar un único simulacro de incendio al inicio del año."
+                ],
+                correct: 0,
+                exp: "La integración consiste en aplicar criterios preventivos en todas las decisiones jerárquicas y actividades[cite: 37]."
+            },
+            // 3
+            {
+                q: "¿Cuál es la diferencia fundamental entre las medidas de prevención y las medidas de protección?",
+                options: [
+                    "Las de prevención tratan de eliminar o minimizar los riesgos evitando que se produzcan daños, y las de protección tratan de evitar o reducir los daños una vez materializado el riesgo.",
+                    "Las de prevención son obligatorias y las de protección son totalmente voluntariosas.",
+                    "No existe ninguna diferencia conceptual entre ambos términos en la LPRL.",
+                    "Las de prevención solo se aplican en oficinas y las de protección en obras."
+                ],
+                correct: 0,
+                exp: "La prevención busca evitar que se produzcan daños eliminando/minimizando riesgos, mientras que la protección reduce o evita los daños tras materializarse[cite: 37]."
+            },
+            // 4
+            {
+                q: "¿Qué busca el principio de la acción preventiva consistente en 'combatir los riesgos en su origen'?",
+                options: [
+                    "Actuar directamente sobre el foco que genera el riesgo (ej. alejar la máquina que produce ruido).",
+                    "Sancionar económicamente al trabajador que cometa una imprudencia.",
+                    "Trasladar al trabajador afectado a otra provincia distinta.",
+                    "Esperar a que el daño se produzca para indemnizarlo."
+                ],
+                correct: 0,
+                exp: "Combatir en su origen significa actuar directamente sobre el foco emisor del riesgo, como alejar una máquina ruidosa[cite: 37, 38]."
+            },
+            // 5
+            {
+                q: "¿Qué establece el principio de 'adaptar el trabajo a la persona'?",
+                options: [
+                    "Que la empresa debe tener en cuenta las características individuales de cada persona y organizar los trabajos en función de ellas, corrigiendo la práctica de que sea la persona quien se adapte al trabajo.",
+                    "Que el trabajador debe modificar su constitución física para encajar en la máquina.",
+                    "Que el horario de oficina debe ser de 24 horas continuadas.",
+                    "Que el salario se adapta a la edad del empleado."
+                ],
+                correct: 0,
+                exp: "Es un principio innovador que obliga a organizar el trabajo según las características individuales de cada persona[cite: 38]."
+            },
+            // 6
+            {
+                q: "Según el artículo 15 de la LPRL, ¿qué tipo de protección se debe anteponer siempre en la selección de medidas?",
+                options: [
+                    "La protección colectiva frente a la individual.",
+                    "La protección individual obligatoria frente a cualquier otra.",
+                    "Los equipos de protección individual de categoría III.",
+                    "La señalización óptica luminosa intermitente."
+                ],
+                correct: 0,
+                exp: "El art. 15 de la LPRL exige adoptar medidas que antepongan la protección colectiva a la individual[cite: 38, 40, 45]."
+            },
+            // 7
+            {
+                q: "¿Qué técnica preventiva básica se ocupa específicamente de prevenir los accidentes laborales?",
+                options: [
+                    "La seguridad en el trabajo.",
+                    "La higiene en el trabajo.",
+                    "La ergonomía.",
+                    "La psicosociología."
+                ],
+                correct: 0,
+                exp: "La seguridad en el trabajo actúa sobre las causas de los accidentes laborales para evitarlos[cite: 38]."
+            },
+            // 8
+            {
+                q: "¿Qué técnica preventiva básica utiliza técnicas no médicas para estudiar, valorar y modificar agentes físicos, químicos y biológicos con el fin de evitar enfermedades profesionales?",
+                options: [
+                    "La higiene en el trabajo.",
+                    "La medicina del trabajo reparadora.",
+                    "La ergonomía dimensional.",
+                    "La psicosociología aplicada."
+                ],
+                correct: 0,
+                exp: "La higiene en el trabajo es el conjunto de técnicas no médicas para prevenir enfermedades profesionales controlando agentes ambientales[cite: 39]."
+            },
+            // 9
+            {
+                q: "¿Cuál es el campo de actuación principal de la ergonomía?",
+                options: [
+                    "Adaptar las condiciones de trabajo a las características fisiológicas y psicológicas del trabajador (evitando la fatiga).",
+                    "Prevenir exclusivamente las infecciones bacterianas agudas.",
+                    "Investigar los delitos penales por fraude laboral.",
+                    "Calcular las cotizaciones a la Seguridad Social."
+                ],
+                correct: 0,
+                exp: "La ergonomía adapta el trabajo a la persona para evitar la fatiga física y mental[cite: 39]."
+            },
+            // 10
+            {
+                q: "¿Qué pretende la psicosociología como técnica preventiva?",
+                options: [
+                    "Evitar el desequilibrio emocional y psicológico y la insatisfacción laboral derivada de la organización del trabajo.",
+                    "Diagnosticar fracturas óseas mediante rayos X.",
+                    "Medir la decibelimetría ambiental de una fábrica.",
+                    "Establecer los valores límite ambientales de los productos químicos."
+                ],
+                correct: 0,
+                exp: "La psicosociología trata de evitar el desequilibrio emocional y la insatisfacción por la organización laboral[cite: 39]."
+            },
+            // 11
+            {
+                q: "¿Cuáles son las tres vertientes en las que actúa la medicina del trabajo?",
+                options: [
+                    "Preventiva, reparadora y rehabilitadora.",
+                    "Financiera, jurídica y penal.",
+                    "Salarial, contractual y disciplinaria.",
+                    "Directa, indirecta y estocástica."
+                ],
+                correct: 0,
+                exp: "La medicina del trabajo actúa en vertiente preventiva, reparadora y rehabilitadora[cite: 39]."
+            },
+            // 12
+            {
+                q: "Dentro de la medicina del trabajo, ¿qué persigue la vertiente reparadora?",
+                options: [
+                    "Devolver la salud al trabajador prestando auxilios necesarios para primeras curas o tratando enfermedades profesionales.",
+                    "Vacunar masivamente contra la gripe estacional.",
+                    "Adaptar el puesto tras una discapacidad permanente.",
+                    "Impartir cursos teóricos de manipulación de cargas."
+                ],
+                correct: 0,
+                exp: "La vertiente reparadora presta auxilios de primera cura y trata las enfermedades profesionales[cite: 39]."
+            },
+            // 13
+            {
+                q: "¿Qué principio preventivo se incumple si se mantiene una máquina ruidosa sabiendo que existe en el mercado otra más silenciosa?",
+                options: [
+                    "Sustituir lo peligroso por lo que entrañe poco o ningún peligro (y tener en cuenta la evolución de la técnica).",
+                    "Dar instrucciones estrictas a los operarios.",
+                    "Utilizar protectores auditivos de categoría III.",
+                    "Colocar señales acústicas de alarma."
+                ],
+                correct: 0,
+                exp: "Involucra sustituir lo peligroso por lo seguro y aprovechar la evolución de la técnica[cite: 38]."
+            },
+            // 14
+            {
+                q: "¿Qué abordan los criterios ergonómicos en el diseño del puesto?",
+                options: [
+                    "El bienestar físico, mental y social, evitando sobresfuerzos y adaptando máquinas y ambiente.",
+                    "Exclusivamente el color corporativo de los uniformes.",
+                    "La reducción del salario base por ergonomía favorable.",
+                    "La prohibición absoluta de usar ordenadores."
+                ],
+                correct: 0,
+                exp: "Los criterios ergonómicos abarcan bienestar físico, mental y social para evitar sobresfuerzos y adaptar el entorno[cite: 39]."
+            },
+            // 15
+            {
+                q: "¿Cómo actúa la seguridad en el trabajo sobre los medios de producción?",
+                options: [
+                    "Controlando las protecciones de las máquinas, su manejo, herramientas y equipos.",
+                    "Midiendo la concentración de gases tóxicos en sangre.",
+                    "Analizando los estados depresivos del personal.",
+                    "Estableciendo turnos rotativos nocturnos."
+                ],
+                correct: 0,
+                exp: "La seguridad actúa en los medios de producción controlando resguardos de máquinas, herramientas y equipos[cite: 38]."
+            },
+            // 16
+            {
+                q: "¿Cuál de los siguientes principios de la acción preventiva NO aparece recogido en el artículo 15 de la LPRL?",
+                options: [
+                    "Anteponer la protección individual a la colectiva.",
+                    "Evitar los riesgos.",
+                    "Evaluar los riesgos que no se puedan evitar.",
+                    "Combatir los riesgos en su origen."
+                ],
+                correct: 0,
+                exp: "La ley exige anteponer la protección colectiva a la individual, por lo que la opción a es falsa[cite: 38]."
+            },
+            // 17
+            {
+                q: "Cuando la higiene en el trabajo evalúa los datos obtenidos en el ambiente laboral, ¿qué busca comprobar?",
+                options: [
+                    "Que no se sobrepasen los valores que actúan como límites de exposición para los contaminantes.",
+                    "Que el rendimiento económico de la empresa sea superior al del año anterior.",
+                    "Que los trabajadores estén motivados psicológicamente.",
+                    "Que las escaleras cumplan la anchura mínima de un metro."
+                ],
+                correct: 0,
+                exp: "Busca comprobar que no se sobrepasen los límites de exposición de los agentes físicos, químicos o biológicos[cite: 39]."
+            },
+            // 18
+            {
+                q: "¿Qué finalidad tiene la vertiente preventiva de la medicina del trabajo?",
+                options: [
+                    "Evitar la aparición de enfermedades mediante vacunaciones y reconocimientos médicos adecuados al puesto.",
+                    "Juzgar las negligencias de los mandos intermedios.",
+                    "Suministrar equipos de protección individual gratuitos.",
+                    "Diseñar la disposición física de los despachos."
+                ],
+                correct: 0,
+                exp: "La vertiente preventiva intenta evitar enfermedades mediante vacunas y reconocimientos médicos[cite: 39]."
+            },
+            // 19
+            {
+                q: "¿Qué técnica preventiva analiza los factores psicosociales para estimular la motivación y la integración?",
+                options: [
+                    "La psicosociología.",
+                    "La higiene industrial pura.",
+                    "La seguridad mecánica.",
+                    "La ergonomía dimensional."
+                ],
+                correct: 0,
+                exp: "La psicosociología estimula la motivación y la participación integrando los aspectos sociales de la empresa[cite: 39]."
+            },
+            // 20
+            {
+                q: "¿Qué se pretende al dar instrucciones a los trabajadores dentro de los principios preventivos?",
+                options: [
+                    "Que el trabajador conozca en todo momento los riesgos existentes en su lugar de trabajo y equipos.",
+                    "Que memoricen el código penal mercantil de memoria.",
+                    "Que renuncien a sus vacaciones anuales retribuidas.",
+                    "Que supervisen personalmente a la Inspección de Trabajo."
+                ],
+                correct: 0,
+                exp: "Se da instrucciones para que el trabajador conozca los riesgos de su puesto, equipos y procedimientos[cite: 38]."
+            },
+            // 21
+            {
+                q: "¿Qué función cumple la vertiente rehabilitadora de la medicina del trabajo?",
+                options: [
+                    "Tratar al enfermo para que recupere el mayor grado posible de sus facultades.",
+                    "Pagar la indemnización por despido improcedente.",
+                    "Impartir formación técnica en el manejo de carretillas.",
+                    "Sustituir al empresario en caso de sanción."
+                ],
+                correct: 0,
+                exp: "La rehabilitadora trata al enfermo para que recupere sus facultades al máximo[cite: 39]."
+            },
+            // 22
+            {
+                q: "Un ejemplo claro de medida de prevención (evitar o minimizar el riesgo en origen) es...",
+                options: [
+                    "Comprar máquinas poco o nada ruidosas.",
+                    "Obligar a llevar tapones auditivos de inserción.",
+                    "Colocar carteles de advertencia de ruido elevado.",
+                    "Indemnizar económicamente la pérdida auditiva."
+                ],
+                correct: 0,
+                exp: "Comprar máquinas silenciosas es una medida de prevención en origen; los tapones son protección[cite: 37]."
+            },
+            // 23
+            {
+                q: "¿Qué principio preventivo se aplica cuando se decide evaluar un riesgo porque este no se ha podido evitar por completo?",
+                options: [
+                    "Evaluar los riesgos que no se puedan evitar.",
+                    "Sustituir lo peligroso por lo seguro.",
+                    "Adoptar medidas de protección individual.",
+                    "Despreciar los riesgos menores."
+                ],
+                correct: 0,
+                exp: "Literalmente corresponde al principio de evaluar los riesgos que no se puedan evitar[cite: 38]."
+            },
+            // 24
+            {
+                q: "¿Cuál de las siguientes disciplinas NO se considera una técnica preventiva básica según los apuntes de FOL?",
+                options: [
+                    "El derecho mercantil concursal.",
+                    "La seguridad en el trabajo y la higiene industrial.",
+                    "La ergonomía y la psicosociología.",
+                    "La medicina del trabajo."
+                ],
+                correct: 0,
+                exp: "El derecho mercantil no forma parte de las técnicas preventivas básicas de FOL[cite: 38, 39]."
+            },
+            // 25
+            {
+                q: "La planificación de la prevención debe integrar de forma coordinada...",
+                options: [
+                    "La técnica, la organización del trabajo, las condiciones, las relaciones sociales y los factores ambientales.",
+                    "Únicamente el presupuesto contable anual de la empresa.",
+                    "Las decisiones exclusivas de los sindicatos mayoritarios.",
+                    "Los horarios de apertura y cierre de las instalaciones."
+                ],
+                correct: 0,
+                exp: "La planificación integra técnica, organización, condiciones, relaciones sociales y factores ambientales[cite: 38]."
+            },
+            // 26
+            {
+                q: "¿Qué características definen a las medidas de protección colectiva?",
+                options: [
+                    "Protegen simultáneamente a una pluralidad de trabajadores frente a un mismo riesgo y disminuyen la probabilidad de que se materialice.",
+                    "Protegen exclusivamente a un solo trabajador de forma individual.",
+                    "Sustituyen por completo a todas las medidas de prevención en origen.",
+                    "Solo se utilizan en caso de catástrofe pública."
+                ],
+                correct: 0,
+                exp: "Las colectivas protegen a varios trabajadores a la vez frente a un mismo riesgo[cite: 40]."
+            },
+            // 27
+            {
+                q: "¿Cuál de las siguientes opciones es un ejemplo claro de medida de protección colectiva?",
+                options: [
+                    "Una barandilla de seguridad en una altura o un sistema de ventilación general.",
+                    "Un arnés de sujeción personal con mosquetón.",
+                    "Una mascarilla autofiltrante FFP2.",
+                    "Un par de guantes de látex quirúrgico."
+                ],
+                correct: 0,
+                exp: "Barandillas y sistemas de ventilación son protecciones colectivas clásicas[cite: 40]."
+            },
+            // 28
+            {
+                q: "¿Cuándo se debe utilizar obligatoriamente un Equipo de Protección Individual (EPI)?",
+                options: [
+                    "Únicamente cuando los riesgos no se hayan podido evitar o limitar suficientemente mediante protección colectiva o técnica.",
+                    "Siempre, antes de aplicar cualquier otra medida de prevención en origen.",
+                    "De forma voluntaria según el criterio estético del trabajador.",
+                    "Solo cuando lo ordene un cliente externo de la empresa."
+                ],
+                correct: 0,
+                exp: "El EPI se utiliza como último recurso cuando la protección colectiva es insuficiente o no se puede evitar el riesgo[cite: 40, 41]."
+            },
+            // 29
+            {
+                q: "¿Cómo define el Real Decreto 773/1997 a un EPI?",
+                options: [
+                    "Cualquier equipo destinado a ser llevado o sujetado por el trabajador para que le proteja de uno o varios riesgos.",
+                    "Cualquier maquinaria pesada dotada de resguardos metálicos fijos.",
+                    "Un sistema automático de extinción de incendios por gas inerte.",
+                    "Cualquier herramienta manual portátil sin motor."
+                ],
+                correct: 0,
+                exp: "El RD 773/1997 define el EPI como equipo destinado a ser llevado o sujetado para proteger de uno o varios riesgos[cite: 41]."
+            },
+            // 30
+            {
+                q: "¿Cuál de los siguientes elementos NO se considera legalmente un EPI según el RD 773/1997?",
+                options: [
+                    "El cinturón de seguridad de un vehículo de carretera.",
+                    "Un casco de protección para obras de construcción.",
+                    "Un arnés anticaídas de categoría III.",
+                    "Unos auriculares de protección contra el ruido."
+                ],
+                correct: 0,
+                exp: "Los cinturones de seguridad de vehículos de carretera están expresamente excluidos de la consideración de EPI[cite: 41]."
+            },
+            // 31
+            {
+                q: "¿Cuál de las siguientes prendas o equipos SÍ está excluida de la consideración de EPI?",
+                options: [
+                    "La ropa de trabajo corriente y uniformes que no protejan específicamente la salud o integridad física.",
+                    "Las pantallas de protección facial frente a radiaciones de soldadura.",
+                    "Los zapatos de seguridad con puntera reforzada.",
+                    "Los guantes aislantes para electricistas."
+                ],
+                correct: 0,
+                exp: "La ropa de trabajo corriente que no protege la integridad física no se considera EPI[cite: 41]."
+            },
+            // 32
+            {
+                q: "Dentro de las exclusiones legales de los EPIs, ¿cómo se tratan los equipos de los servicios de socorro y salvamento (ej. chalecos salvavidas)?",
+                options: [
+                    "Tampoco se consideran EPIs según la normativa.",
+                    "Se consideran EPIs de máxima categoría III obligatorios.",
+                    "Forman parte de las protecciones colectivas de obra.",
+                    "Se regulan por el Código Civil exclusivamente."
+                ],
+                correct: 0,
+                exp: "Los equipos de socorro y salvamento (como chalecos salvavidas) están excluidos del concepto de EPI[cite: 41]."
+            },
+            // 33
+            {
+                q: "¿Quién debe sufragar el coste económico de la adquisición de los EPIs facilitados a los trabajadores?",
+                options: [
+                    "El empresario, suministrándolos de forma totalmente gratuita.",
+                    "El trabajador mediante descuento prorrateado en su nómina mensual.",
+                    "A partes iguales entre el Estado y el trabajador.",
+                    "La mutua colaboradora de la Seguridad Social."
+                ],
+                correct: 0,
+                exp: "El empresario está obligado a suministrar los EPIs de forma gratuita a sus trabajadores[cite: 42]."
+            },
+            // 34
+            {
+                q: "¿Qué características esenciales deben reunir obligatoriamente todos los EPIs?",
+                options: [
+                    "Ser eficaces frente al riesgo, inocuos (sin riesgo por sí mismos), ergonómicos y adecuados al usuario y llevar marcado CE.",
+                    "Ser de color rojo brillante y fabricados en cuero sintético.",
+                    "Tener un coste económico superior a 100 euros.",
+                    "Ser reutilizables por cualquier persona de la plantilla."
+                ],
+                correct: 0,
+                exp: "Los EPIs deben ser eficaces, inocuos, ergonómicos, adecuados al riesgo y llevar el marcado CE[cite: 41, 42]."
+            },
+            // 35
+            {
+                q: "¿A qué categoría pertenecen los EPIs que protegen contra riesgos mínimos (ej. guantes de jardinería o limpieza doméstica)?",
+                options: [
+                    "Categoría I.",
+                    "Categoría II.",
+                    "Categoría III.",
+                    "Categoría Especial Cero."
+                ],
+                correct: 0,
+                exp: "La Categoría I protege contra riesgos mínimos y puede comercializarse sin certificado complejo o marcado exigente de organismo notificado[cite: 43]."
+            },
+            // 36
+            {
+                q: "¿Qué nivel de riesgo cubren los EPIs de Categoría II (ej. calzado de seguridad)?",
+                options: [
+                    "Riesgos intermedios.",
+                    "Riesgos mínimos o de confort.",
+                    "Riesgos graves, mortales o de irreversibilidad para la salud.",
+                    "Riesgos nucleares extremos únicamente."
+                ],
+                correct: 0,
+                exp: "La Categoría II protege contra riesgos intermedios y necesita certificado CE[cite: 43]."
+            },
+            // 37
+            {
+                q: "¿Qué tipo de equipos se encuadran en la Categoría III de EPIs (ej. arneses anticaídas o equipos frente a sustancias muy peligrosas)?",
+                options: [
+                    "Equipos que protegen contra riesgos graves, mortales o de lesiones irreversibles, requiriendo certificación de organismo autorizado.",
+                    "Equipos desechables de papel para uso médico básico.",
+                    "Herramientas manuales aisladas de baja tensión.",
+                    "Ropa de trabajo corriente sin protección."
+                ],
+                correct: 0,
+                exp: "La Categoría III protege contra riesgos graves, mortales o irreversibles y requiere certificación de organismo autorizado[cite: 43]."
+            },
+            // 38
+            {
+                q: "¿Cuál es una obligación específica del trabajador en relación con los EPIs recibidos?",
+                options: [
+                    "Utilizarlos y cuidarlos correctamente, colocándolos en su lugar indicado tras su uso e informar de cualquier defecto.",
+                    "Venderlos a nuevos compañeros si ya no los necesita.",
+                    "Modificarlos estéticamente para que resulten más cómodos.",
+                    "Guardarlos en su domicilio particular permanentemente."
+                ],
+                correct: 0,
+                exp: "El trabajador debe usarlos y cuidarlos correctamente, guardarlos en su sitio e informar de anomalías[cite: 42]."
+            },
+            // 39
+            {
+                q: "¿Qué altura mínima obligatoria deben tener las barandillas utilizadas como protección colectiva contra caídas de altura?",
+                options: [
+                    "Al menos 90 centímetros (con reborde inferior para evitar caída de objetos).",
+                    "Exactamente 50 centímetros.",
+                    "1,50 metros.",
+                    "No hay altura mínima regulada."
+                ],
+                correct: 0,
+                exp: "Las barandillas de protección colectiva deben tener una altura mínima de 90 cm con reborde protector inferior[cite: 40]."
+            },
+            // 40
+            {
+                q: "¿Para qué sirven las redes de seguridad dispuestas en los perímetros de forjados en obras de construcción?",
+                options: [
+                    "Para minimizar los efectos de la posible caída accidental de un trabajador.",
+                    "Para almacenar herramientas pesadas en altura.",
+                    "Para impedir la entrada de polvo químico al recinto.",
+                    "Como elemento decorativo de la fachada."
+                ],
+                correct: 0,
+                exp: "Las redes de seguridad se disponen en perímetros para minimizar efectos de caídas accidentales de operarios[cite: 40]."
+            },
+            // 41
+            {
+                q: "¿Qué función realizan las marquesinas o viseras dispuestas en la primera planta de las obras?",
+                options: [
+                    "Protegen a los trabajadores del riesgo de caída de objetos y materiales desde plantas superiores.",
+                    "Filtran la radiación solar ultravioleta en verano.",
+                    "Sirven como vía exclusiva de evacuación de emergencia eléctrica.",
+                    "Aíslan completamente el ruido de la maquinaria pesada."
+                ],
+                correct: 0,
+                exp: "Las marquesinas protegen frente al riesgo de caída de objetos y materiales en obras[cite: 40]."
+            },
+            // 42
+            {
+                q: "¿Qué es un interruptor diferencial dentro de las medidas de protección colectiva eléctrica?",
+                options: [
+                    "Un dispositivo que corta el paso de corriente cuando una persona sufre un contacto directo o indirecto.",
+                    "Un regulador manual de voltaje para bombillas de bajo consumo.",
+                    "Un cable de cobre conectado a las tuberías de agua.",
+                    "Un fusible térmico que funde a 100 °C."
+                ],
+                correct: 0,
+                exp: "El interruptor diferencial corta el paso de corriente ante contactos directos o indirectos[cite: 40]."
+            },
+            // 43
+            {
+                q: "¿Qué son los resguardos instalados en las máquinas?",
+                options: [
+                    "Componentes o dispositivos añadidos que actúan como barrera material impidiendo alcanzar partes peligrosas.",
+                    "Manuales de instrucciones impresos en papel ignífugo.",
+                    "Guantes de malla metálica para carniceros.",
+                    "Interruptores de encendido y apagado general."
+                ],
+                correct: 0,
+                exp: "Los resguardos son barreras materiales añadidas a máquinas para impedir alcanzar zonas peligrosas[cite: 41]."
+            },
+            // 44
+            {
+                q: "¿Qué obligación tiene el empresario respecto a la formación en el uso de EPIs complejos?",
+                options: [
+                    "Proporcionar la formación e información necesarias, incluso sesiones de entrenamiento práctico cuando sean complejos o múltiples.",
+                    "Entregar un folleto en inglés para que el trabajador lo traduzca.",
+                    "Exigir que el trabajador pague su propia homologación técnica.",
+                    "Ninguna, se presupone que el trabajador sabe usarlos por intuición."
+                ],
+                correct: 0,
+                exp: "El empresario debe informar, formar e incluso realizar entrenamientos prácticos cuando los EPIs sean complejos[cite: 42]."
+            },
+            // 45
+            {
+                q: "Si un trabajador necesita utilizar varios EPIs simultáneamente, ¿qué condición deben cumplir?",
+                options: [
+                    "Deben ser compatibles entre sí y mantener la eficacia protectora que tienen por separado.",
+                    "Deben ser obligatoriamente del mismo fabricante y color.",
+                    "Debe anularse el uso del casco si se llevan gafas protectoras.",
+                    "No se pueden utilizar nunca dos EPIs a la vez."
+                ],
+                correct: 0,
+                exp: "Si se usan varios EPIs simultáneamente, deben ser compatibles entre sí sin perder eficacia[cite: 42]."
+            },
+            // 46
+            {
+                q: "¿Qué establece el artículo 25 de la LPRL en relación con los trabajadores especialmente sensibles?",
+                options: [
+                    "Que el empresario garantizará de manera específica la protección de los trabajadores que por sus características personales o estado biológico sean sensibles.",
+                    "Que estos trabajadores deben ser despedidos de forma objetiva por causas de salud.",
+                    "Que no pueden acceder en ningún caso al mercado de trabajo ordinario.",
+                    "Que su protección depende exclusivamente de la seguridad social pública."
+                ],
+                correct: 0,
+                exp: "El art. 25 LPRL obliga al empresario a garantizar protección específica a trabajadores especialmente sensibles por sus características o estado biológico[cite: 44]."
+            },
+            // 47
+            {
+                q: "Dentro de los colectivos de trabajadores especialmente sensibles regulados en la LPRL, ¿qué edades comprende el colectivo de 'menores' (Art. 27)?",
+                options: [
+                    "Mayores de 16 años y menores de 18 años.",
+                    "Menores de 14 años exclusivamente.",
+                    "Personas comprendidas entre los 18 y los 21 años.",
+                    "Cualquier menor escolarizado en enseñanza obligatoria."
+                ],
+                correct: 0,
+                exp: "El Estatuto de los Trabajadores y la LPRL consideran menores a los mayores de 16 y menores de 18 años[cite: 44]."
+            },
+            // 48
+            {
+                q: "¿Qué edad mínima fija el Estatuto de los Trabajadores (art. 6.1) para la contratación laboral general?",
+                options: [
+                    "Se prohíbe expresamente la contratación de menores de 16 años (salvo excepciones en espectáculos públicos).",
+                    "Los 14 años cumplidos con permiso paterno.",
+                    "Los 12 años en actividades agrícolas.",
+                    "No hay límite de edad inferior regulado."
+                ],
+                correct: 0,
+                exp: "Se prohíbe la contratación de menores de 16 años salvo excepciones de espectáculos públicos[cite: 44]."
+            },
+            // 49
+            {
+                q: "¿Por qué se considera a los trabajadores temporales (y de ETT) un colectivo con mayor vulnerabilidad preventiva (Art. 28 LPRL)?",
+                options: [
+                    "Por el desconocimiento del oficio y del lugar de trabajo, la inexperiencia, la acogida insuficiente y la asignación a veces de trabajos más peligrosos.",
+                    "Por su superior sueldo en comparación con los fijos.",
+                    "Porque están exentos de cumplir las normas de seguridad de la empresa.",
+                    "Porque trabajan siempre desde su domicilio particular."
+                ],
+                correct: 0,
+                exp: "Soportan mayor riesgo (el triple de accidentes estadísticamente) por inexperiencia, desconocimiento y asignación de tareas peligrosas[cite: 44]."
+            },
+            // 50
+            {
+                q: "¿Qué tendencia demográfica y laboral destaca la Agencia Europea para la Salud en el Trabajo respecto a los 'trabajadores mayores'?",
+                options: [
+                    "El retraso de la jubilación y el envejecimiento demográfico, estimándose un incremento notable de su proporción en las plantillas.",
+                    "La desaparición total de trabajadores mayores de 45 años en la industria.",
+                    "La obligación de jubilarse anticipadamente a los 50 años.",
+                    "La prohibición de usar pantallas de visualización de datos a partir de cierta edad."
+                ],
+                correct: 0,
+                exp: "El retraso de la jubilación y tendencias demográficas llevan a reforzar políticas de protección para trabajadores mayores[cite: 44]."
+            },
+            // 51
+            {
+                q: "¿Qué función principal tiene la 'señalización de seguridad' en el trabajo?",
+                options: [
+                    "Advertir de posibles peligros, prohibir actos, exigir comportamientos e informar sobre medidas de emergencia o contra incendios.",
+                    "Sustituir por completo a las protecciones colectivas e individuales de una fábrica.",
+                    "Garantizar la iluminación nocturna de los despachos administrativos.",
+                    "Medir la temperatura ambiental en grados centígrados."
+                ],
+                correct: 0,
+                exp: "La señalización advierte de peligros, prohíbe, exige conductas e informa de emergencias o incendios[cite: 50]."
+            },
+            // 52
+            {
+                q: "¿Puede considerarse la señalización de seguridad como una medida sustitutoria de las protecciones técnicas colectivas?",
+                options: [
+                    "No, nunca; la señalización complementa pero jamás sustituye a las medidas técnicas de protección colectiva u organizativas.",
+                    "Sí, siempre que la empresa quiera ahorrar costes de instalación.",
+                    "Sí, en el caso exclusivo de riesgos eléctricos de alta tensión.",
+                    "Únicamente en obras de construcción de carreteras."
+                ],
+                correct: 0,
+                exp: "La señalización nunca debe considerarse una medida sustitutoria de las protecciones técnicas; solo complementa[cite: 40, 46, 50]."
+            },
+            // 53
+            {
+                q: "¿Cuáles son los tipos de señalización en función del sentido por el que se perciben?",
+                options: [
+                    "Auditiva, olfativa, táctil y óptica.",
+                    "Visual, mental y psíquica.",
+                    "Mecánica, química y biológica.",
+                    "Interna, externa y remota."
+                ],
+                correct: 0,
+                exp: "En función del sentido por el que se perciben se clasifican en auditiva, olfativa, táctil y óptica[cite: 50]."
+            },
+            // 54
+            {
+                q: "Dentro de la señalización óptica, ¿qué indican habitualmente las señales luminosas intermitentes?",
+                options: [
+                    "Un mayor grado de peligrosidad o urgencia en la situación.",
+                    "Que el dispositivo se encuentra apagado o averiado.",
+                    "Que la jornada laboral ha finalizado.",
+                    "La temperatura óptima de confort del local."
+                ],
+                correct: 0,
+                exp: "Las señales luminosas intermitentes indican un mayor grado de peligrosidad o urgencia[cite: 50]."
+            },
+            // 55
+            {
+                q: "¿Qué es un 'pictograma' en el contexto de la señalización óptica en forma de panel?",
+                options: [
+                    "Una imagen que resulta de la combinación de formas geométricas, color y un símbolo con significado universal.",
+                    "Un texto escrito en lengua extranjera obligatorio para multinacionales.",
+                    "Una sirena acústica de alta frecuencia.",
+                    "Un certificado médico de aptitud laboral."
+                ],
+                correct: 0,
+                exp: "El pictograma es la combinación de forma geométrica, color y símbolo con significado universal[cite: 50]."
+            },
+            // 56
+            {
+                q: "¿Qué significado y color de seguridad tiene una señal con forma redonda, pictograma blanco sobre fondo azul?",
+                options: [
+                    "Obligación.",
+                    "Prohibición.",
+                    "Advertencia de peligro.",
+                    "Salvamento o socorro."
+                ],
+                correct: 0,
+                exp: "El color azul en forma redonda indica obligación (pictograma blanco sobre fondo azul)[cite: 46]."
+            },
+            // 57
+            {
+                q: "¿Qué significado tiene el color ROJO en las señales de seguridad en forma de panel?",
+                options: [
+                    "Prohibición, peligro-alarma y material o equipos de lucha contra incendios.",
+                    "Advertencia de sustancias irritantes.",
+                    "Salvamento, auxilio y situación de seguridad.",
+                    "Obligación genérica de uso de EPIs."
+                ],
+                correct: 0,
+                exp: "El rojo se asocia a prohibición, peligro-alarma y equipos de lucha contra incendios."
+            },
+            // 58
+            {
+                q: "¿Qué forma geométrica y colores caracterizan a una señal de 'advertencia o peligro'?",
+                options: [
+                    "Triangular, con pictograma negro sobre fondo amarillo y bordes negros.",
+                    "Redonda, con pictograma rojo sobre fondo blanco.",
+                    "Rectangular, con pictograma blanco sobre fondo verde.",
+                    "Cuadrada, con pictograma azul sobre fondo blanco."
+                ],
+                correct: 0,
+                exp: "La señal de advertencia es triangular con pictograma negro sobre fondo amarillo y bordes negros[cite: 46]."
+            },
+            // 59
+            {
+                q: "¿Qué forma geométrica y colores tienen las señales destinadas a 'salvamento o socorro'?",
+                options: [
+                    "Rectangular o cuadrada, con pictograma blanco sobre fondo verde.",
+                    "Triangular, con pictograma negro sobre fondo amarillo.",
+                    "Redonda, con pictograma blanco sobre fondo rojo.",
+                    "Triangular, con banda transversal roja."
+                ],
+                correct: 0,
+                exp: "Las de salvamento o socorro son rectangulares o cuadradas con pictograma blanco sobre fondo verde[cite: 46]."
+            },
+            // 60
+            {
+                q: "¿Cuál es el color de contraste complementario que se utiliza habitualmente junto al color de seguridad amarillo en los paneles de advertencia?",
+                options: [
+                    "El negro.",
+                    "El blanco puro.",
+                    "El rojo brillante.",
+                    "El verde esmeralda."
+                ],
+                correct: 0,
+                exp: "El color de contraste que complementa al amarillo es el negro."
+            },
+            // 61
+            {
+                q: "¿Qué son los aditivos odoríferos (como el mercaptano añadido al gas butano inodoro)?",
+                options: [
+                    "Un tipo de señalización olfativa para detectar su presencia y prevenir fugas.",
+                    "Un agente químico corrosivo de Categoría III.",
+                    "Un residuo biológico del Grupo 4.",
+                    "Un EPI de protección respiratoria."
+                ],
+                correct: 0,
+                exp: "Es una señalización olfativa utilizada para detectar la presencia de gases inodoros como el butano[cite: 50]."
+            },
+            // 62
+            {
+                q: "¿Qué es la señalización gestual?",
+                options: [
+                    "Un movimiento o disposición de los brazos o manos en forma codificada para guiar a personas en maniobras peligrosas.",
+                    "Un lenguaje de signos exclusivo para personas sordas en la oficina.",
+                    "Un sistema táctil de lectura en relieve para ciegos.",
+                    "Una alarma acústica de emergencia por incendio."
+                ],
+                correct: 0,
+                exp: "La señalización gestual se realiza mediante movimientos codificados de manos o brazos para guiar maniobras con riesgo[cite: 50]."
+            },
+            // 63
+            {
+                q: "¿Qué se debe hacer si una trabajadora gestante se encuentra expuesta a ruido intenso o sustancias nocivas?",
+                options: [
+                    "Garantizar adaptaciones o protección específica (Art. 26 LPRL), ya que los riesgos generales se acentúan en embarazadas o lactantes.",
+                    "Darle de baja definitiva en la seguridad social sin derecho a prestación.",
+                    "Indicarle que use tapones auditivos convencionales confiando en que sea suficiente.",
+                    "Ignorar la situación hasta el nacimiento del bebé."
+                ],
+                correct: 0,
+                exp: "Los riesgos para la población general se acentúan en embarazadas o lactantes, requiriendo protección específica según el art. 26 LPRL[cite: 44]."
+            },
+            // 64
+            {
+                q: "¿Cómo se clasifican las señales relativas a los equipos de lucha contra incendios en cuanto a forma y color?",
+                options: [
+                    "Rectangular o cuadrada, con pictograma blanco sobre fondo rojo.",
+                    "Triangular, con pictograma negro sobre fondo amarillo.",
+                    "Redonda, con pictograma negro sobre fondo blanco y barra roja.",
+                    "Triangular, con fondo verde y bordes blancos."
+                ],
+                correct: 0,
+                exp: "Los equipos de lucha contra incendios se señalan con formato rectangular o cuadrado y pictograma blanco sobre fondo rojo."
+            },
+            // 65
+            {
+                q: "¿Qué características de diseño y visibilidad exige la normativa para las señales luminosas de emergencia?",
+                options: [
+                    "Su intensidad luminosa debe asegurar la percepción sin producir deslumbramientos.",
+                    "Deben ser obligatoriamente de color azul eléctrico parpadeante.",
+                    "Deben emitir un sonido estridente de más de 120 decibelios simultáneamente de forma obligatoria.",
+                    "Solo deben ser visibles con luz natural directa."
+                ],
+                correct: 0,
+                exp: "La intensidad de la luz en señales luminosas debe asegurar su percepción sin producir deslumbramientos[cite: 50]."
+            },
+            // 66
+            {
+                q: "¿Qué color de seguridad y forma geométrica caracteriza a las señales de 'prohibición'?",
+                options: [
+                    "Redonda, con pictograma negro sobre fondo blanco, bordes y banda transversal roja.",
+                    "Triangular, con pictograma negro sobre fondo amarillo.",
+                    "Cuadrada, con pictograma blanco sobre fondo verde.",
+                    "Rectangular, con pictograma blanco sobre fondo azul."
+                ],
+                correct: 0,
+                exp: "La prohibición es redonda, pictograma negro sobre fondo blanco, con borde y banda transversal descendente rojos[cite: 46]."
+            },
+            // 67
+            {
+                q: "Si en una empresa se detecta un trabajador con discapacidad física, psíquica o sensorial, ¿cómo debe actuar la evaluación de riesgos?",
+                options: [
+                    "Teniendo en cuenta sus características individuales sin dar por sentado que todos los trabajadores son iguales ni formular hipótesis erróneas.",
+                    "Excluyéndole de cualquier tipo de tarea productiva en la fábrica.",
+                    "Asignándole siempre el puesto más peligroso para probar su destreza.",
+                    "Aplicando únicamente la normativa general sin adaptaciones."
+                ],
+                correct: 0,
+                exp: "Hay que tener en cuenta las características individuales sin formular hipótesis erróneas sobre la discapacidad[cite: 44]."
+            },
+            // 68
+            {
+                q: "¿Qué técnica preventiva se aplica cuando se detecta desmotivación o insatisfacción en el trabajo debido a la organización?",
+                options: [
+                    "La psicosociología.",
+                    "La higiene industrial química.",
+                    "La seguridad mecánica pura.",
+                    "La medicina rehabilitadora."
+                ],
+                correct: 0,
+                exp: "La psicosociología evita la insatisfacción y estimula la motivación y la integración social[cite: 39]."
+            },
+            // 69
+            {
+                q: "¿Qué es un recipiente rugoso para determinadas sustancias químicas considerado como tipo de señalización?",
+                options: [
+                    "Una señalización táctil.",
+                    "Una señalización olfativa.",
+                    "Un pictograma óptico en relieve.",
+                    "Una señal gestual manual."
+                ],
+                correct: 0,
+                exp: "Los recipientes rugosos para advertir sustancias peligrosas al tacto constituyen señalización táctil[cite: 50]."
+            },
+            // 70
+            {
+                q: "¿Qué requisito deben cumplir los colores y formas de las señales de seguridad para evitar problemas en personas con daltonismo?",
+                options: [
+                    "Combinar colores de seguridad con formas geométricas normalizadas y pictogramas claros.",
+                    "Utilizar exclusivamente palabras escritas en tipografía pequeña.",
+                    "Prescindir de cualquier color brillante.",
+                    "Emitir una locución verbal grabada obligatoria."
+                ],
+                correct: 0,
+                exp: "Las formas geométricas y los pictogramas refuerzan la interpretación evitando anomalías de percepción en daltónicos[cite: 50]."
+            },
+            // 71
+            {
+                q: "¿Qué finalidad principal persigue la señalización de equipos de lucha contra incendios?",
+                options: [
+                    "Facilitar la localización rápida de las instalaciones de protección contra incendios.",
+                    "Indicar la prohibición de fumar en los almacenes.",
+                    "Advertir de la presencia de radiaciones ionizantes.",
+                    "Señalar las vías de salida para trabajadores temporales."
+                ],
+                correct: 0,
+                exp: "Facilita la localización de las instalaciones de protección contra incendios[cite: 50]."
+            },
+            // 72
+            {
+                q: "Dentro de la señalización acústica, ¿cómo se denominan las señales sonoras codificadas (sirenas, timbres)?",
+                options: [
+                    "Señales acústicas.",
+                    "Comunicación verbal oral.",
+                    "Señales gestuales auditivas.",
+                    "Balizamientos ópticos."
+                ],
+                correct: 0,
+                exp: "Se denominan señales acústicas mediante sirenas, timbres o alarmas codificadas[cite: 50]."
+            },
+            // 73
+            {
+                q: "¿Qué indica una señal de color verde con pictograma blanco en forma rectangular?",
+                options: [
+                    "Una situación de salvamento, socorro o ruta de evacuación.",
+                    "Un peligro inminente de descarga eléctrica de alta tensión.",
+                    "Una prohibición estricta de acceso a personal autorizado.",
+                    "La obligación de utilizar protección respiratoria de categoría III."
+                ],
+                correct: 0,
+                exp: "El color verde indica salvamento, socorro o situación de seguridad (vías de evacuación)[cite: 46]."
+            },
+            // 74
+            {
+                q: "¿Cuál de los siguientes colectivos soporta estadísticamente una mayor tasa de incidencia de accidentes laborales debido a su inexperiencia e inestabilidad?",
+                options: [
+                    "Los trabajadores temporales y de ETT.",
+                    "Los directores gerentes con contrato indefinido de alta dirección.",
+                    "Los funcionarios de carrera con más de 30 años de antigüedad.",
+                    "Los asesores jurídicos externos."
+                ],
+                correct: 0,
+                exp: "Los trabajadores temporales soportan aproximadamente el triple de riesgo de accidentes laborales por inexperiencia y precariedad[cite: 44]."
+            },
+            // 75
+            {
+                q: "¿Qué principio preventivo se aplica al priorizar una red de seguridad perimetral frente a un arnés individual en una obra de gran altura?",
+                options: [
+                    "Anteponer la protección colectiva a la individual.",
+                    "Sustituir lo peligroso por lo inocuo.",
+                    "Adaptar el trabajo a la persona exclusivamente.",
+                    "Reducir el tiempo de exposición al riesgo."
+                ],
+                correct: 0,
+                exp: "Una red perimetral es protección colectiva, cumpliendo el principio de anteponerla a la individual (arnés)[cite: 38, 40]."
+            },
+            // 76
+            {
+                q: "Si un empresario encarga a un trabajador la limpieza con productos químicos sin haberle proporcionado antes información ni EPIs, ¿qué principio preventivo está vulnerando directamente?",
+                options: [
+                    "El deber de dar instrucciones y formación adecuada a los trabajadores, además de adoptar equipos seguros.",
+                    "El principio de adaptar el trabajo a la edad cronológica.",
+                    "La obligación de instalar alarmas acústicas ópticas.",
+                    "El principio de protección colectiva exclusiva."
+                ],
+                correct: 0,
+                exp: "Se vulnera el principio de dar instrucciones y formar a los trabajadores de forma adecuada[cite: 38, 42]."
+            },
+            // 77
+            {
+                q: "¿Qué organismo científico-técnico nacional elabora las Guías Técnicas y Notas Técnicas de Prevención (NTP) muy útiles para la aplicación de medidas preventivas?",
+                options: [
+                    "El Instituto Nacional de Seguridad y Salud en el Trabajo (INSST).",
+                    "La Agencia Europea de Bilbao.",
+                    "La Tesorería General de la Seguridad Social.",
+                    "El Ministerio de Hacienda."
+                ],
+                correct: 0,
+                exp: "El INSST elabora guías técnicas y NTPs de referencia para la prevención[cite: 45]."
+            },
+            // 78
+            {
+                q: "¿Qué clase de EPI se requiere para proteger frente a salpicaduras menores de agua limpia en tareas de limpieza de oficina?",
+                options: [
+                    "Ningún EPI especial o uno de Categoría I (riesgos mínimos).",
+                    "Un traje estanco de Categoría III completo.",
+                    "Una escafandra autónoma de oxígeno.",
+                    "Un arnés anticaídas homologado."
+                ],
+                correct: 0,
+                exp: "Para riesgos mínimos basta con elementos de Categoría I o ninguno específico de alta protección[cite: 43]."
+            },
+            // 79
+            {
+                q: "¿Por qué motivo un EPI nunca debe ser modificado por el propio trabajador?",
+                options: [
+                    "Porque puede comprometer su eficacia protectora original y anular el marcado CE.",
+                    "Porque la pintura decorativa gasta demasiada energía.",
+                    "Porque la ley obliga a cambiarlo cada semana obligatoriamente.",
+                    "Porque pierde peso y deja de flotar."
+                ],
+                correct: 0,
+                exp: "Modificar un EPI anula su homologación y eficacia protectora frente al riesgo previsto."
+            },
+            // 80
+            {
+                q: "¿Qué diferencia hay entre el marcado CE de un juguete y el marcado CE de un EPI de Categoría III?",
+                options: [
+                    "El EPI de Categoría III requiere además el control de un organismo notificado autorizado.",
+                    "No hay ninguna diferencia en los controles de fabricación.",
+                    "El marcado CE de los EPIs solo sirve para el comercio nacional.",
+                    "Los EPIs no llevan marcado CE si son baratos."
+                ],
+                correct: 0,
+                exp: "Los EPIs de categoría III requieren certificación y control por un organismo autorizado además del marcado CE[cite: 43]."
+            },
+            // 81
+            {
+                q: "¿Qué es una pantalla de absorción acústica en el entorno de una máquina ruidosa?",
+                options: [
+                    "Una medida de protección colectiva para reducir los niveles de ruido o proteger frente a sus efectos.",
+                    "Un tipo de auricular individual de inserción.",
+                    "Un sistema de iluminación estroboscópica.",
+                    "Una barrera térmica frente al fuego."
+                ],
+                correct: 0,
+                exp: "Las pantallas de absorción acústica reducen el nivel de ruido ambiental como protección colectiva[cite: 46]."
+            },
+            // 82
+            {
+                q: "¿Qué se busca al instalar campanas extractoras en zonas con emisión de contaminantes químicos?",
+                options: [
+                    "Capturar el contaminante próximo al foco de emisión evitando su dispersión y la toxicidad ambiental.",
+                    "Aumentar la temperatura general de la nave industrial.",
+                    "Iluminar con mayor intensidad las mesas de trabajo.",
+                    "Reducir las vibraciones del suelo."
+                ],
+                correct: 0,
+                exp: "Las campanas extractoras se instalan próximas a los focos de emisión de contaminantes para evitar toxicidad[cite: 46]."
+            },
+            // 83
+            {
+                q: "Si en una empresa se produce un incendio de líquidos inflamables (Clase B), ¿qué medida de protección colectiva contra incendios destaca por su ubicación cercana a las salidas?",
+                options: [
+                    "Los extintores y las BIEs (Bocas de Incendio Equipadas).",
+                    "Las redes de seguridad perimetrales.",
+                    "Los interruptores diferenciales de baja tensión.",
+                    "Las pantallas acústicas de techo."
+                ],
+                correct: 0,
+                exp: "Los extintores y BIEs son equipos de protección contra incendios situados cerca de salidas[cite: 18, 20]."
+            },
+            // 84
+            {
+                q: "¿Qué principio de la acción preventiva se aplica cuando se decide automatizar un proceso peligroso para que ningún operario deba manipularlo directamente?",
+                options: [
+                    "Evitar los riesgos o combatirlos en su origen mediante la evolución de la técnica.",
+                    "Obligar al uso de guantes de malla de categoría III.",
+                    "Colocar señales ópticas intermitentes rojas.",
+                    "Reducir el salario de los operarios expuestos."
+                ],
+                correct: 0,
+                exp: "Automatizar para evitar la exposición directa aplica la evolución técnica y la prevención en origen[cite: 38]."
+            },
+            // 85
+            {
+                q: "¿Qué papel juegan los delegados de prevención en la empresa en relación con las medidas de protección?",
+                options: [
+                    "Ser consultados y participar en las propuestas de adopción de medidas preventivas y de protección.",
+                    "Imponer sanciones económicas directas a los trabajadores infractores.",
+                    "Fabricar personalmente los EPIs en horario nocturno.",
+                    "Decidir unilateralmente el presupuesto anual de la mutua."
+                ],
+                correct: 0,
+                exp: "Los trabajadores y sus representantes (delegados de prevención) tienen derecho a ser consultados y participar[cite: 9]."
+            },
+            // 86
+            {
+                q: "¿Qué es un vallado perimetral en una zona de obras?",
+                options: [
+                    "Una medida de protección colectiva muy usual para delimitar y proteger el espacio de trabajo.",
+                    "Un EPI individual de categoría I para las manos.",
+                    "Una señal acústica de advertencia de zanjas.",
+                    "Un sistema médico de rehabilitación de lesiones."
+                ],
+                correct: 0,
+                exp: "El vallado perimetral es una medida de protección colectiva habitual en obras[cite: 45]."
+            },
+            // 87
+            {
+                q: "Cuando un trabajador detecta que su casco de protección presenta una grieta estructural profunda tras un golpe, ¿qué debe hacer según sus obligaciones?",
+                options: [
+                    "Informar inmediatamente a su superior jerárquico y dejar de utilizar el equipo defectuoso.",
+                    "Repararlo aplicando pegamento rápido y seguir usándolo en silencio.",
+                    "Ocultarlo en su taquilla para que nadie lo note.",
+                    "Venderlo a un compañero temporal de menor categoría."
+                ],
+                correct: 0,
+                exp: "El trabajador debe informar de inmediato de cualquier defecto o daño que suponga pérdida de eficacia protectora[cite: 47]."
+            },
+            // 88
+            {
+                q: "¿Qué característica ergonómica debe cumplir una silla de oficina para prevenir lesiones de columna según la materia preventiva?",
+                    options: [
+                    "Ser regulable en altura, disponer de respaldo adaptado y ofrecer estabilidad con base de cinco patas.",
+                    "Ser completamente rígida sin posibilidad de inclinación.",
+                    "Estar fabricada exclusivamente de madera maciza sin acolchado.",
+                    "Tener ruedas libres sin frenos ni estabilidad."
+                ],
+                correct: 0,
+                exp: "Las sillas ergonómicas deben ser ajustables, estables y sostener adecuadamente la columna[cite: 39]."
+            },
+            // 89
+            {
+                q: "¿Qué evalúa la medicina del trabajo al realizar reconocimientos médicos periódicos específicos?",
+                options: [
+                    "El estado de salud del trabajador en relación con los riesgos específicos de su puesto de trabajo.",
+                    "La ideología política y afiliación sindical del empleado.",
+                    "El nivel de ingresos económicos familiares fuera de la empresa.",
+                    "La destreza en el manejo de redes sociales."
+                ],
+                correct: 0,
+                exp: "Los reconocimientos médicos evalúan la salud en función de los riesgos del puesto[cite: 9, 39]."
+            },
+            // 90
+            {
+                q: "¿Por qué se prohíbe el uso de puertas correderas o giratorias como salidas principales de evacuación de emergencia?",
+                options: [
+                    "Porque pueden atascarse, ralentizar o impedir la salida rápida y fluida de las personas en caso de pánico o emergencia.",
+                    "Porque consumen demasiada energía eléctrica trifásica.",
+                    "Porque su mantenimiento económico es muy elevado para la empresa.",
+                    "Porque impiden la entrada de luz natural exterior."
+                ],
+                correct: 0,
+                exp: "Las puertas giratorias o correderas no garantizan una evacuación rápida y segura ante emergencias[cite: 18]."
+            },
+            // 91
+            {
+                q: "¿Qué indica una señal triangular con pictograma negro sobre fondo amarillo y bordes negros?",
+                options: [
+                    "Advertencia de peligro.",
+                    "Obligación estricta.",
+                    "Salvamento y socorro.",
+                    "Prohibición de paso."
+                ],
+                correct: 0,
+                exp: "El triángulo con fondo amarillo indica advertencia de peligro[cite: 46]."
+            },
+            // 92
+            {
+                q: "¿Qué tipo de señalización se emplea cuando se añade un olor característico (mercaptano) a un gas inodoro como el butano?",
+                options: [
+                    "Señalización olfativa.",
+                    "Señalización óptica luminosa.",
+                    "Señalización táctil en relieve.",
+                    "Comunicación verbal escrita."
+                ],
+                correct: 0,
+                exp: "El uso de sustancias odoríferas es un subtipo de señalización olfativa[cite: 50]."
+            },
+            // 93
+            {
+                q: "¿Qué son los EPIs destinados a proteger las vías respiratorias frente a la inhalación de partículas o gases nocivos?",
+                options: [
+                    "Mascarillas y equipos filtrantes o aislantes respiratorios.",
+                    "Gafas herméticas panorámicas.",
+                    "Guantes de nitrilio de alta resistencia.",
+                    "Botas hidrófugas con puntera de acero."
+                ],
+                correct: 0,
+                exp: "Las mascarillas y respiradores protegen las vías respiratorias[cite: 43]."
+            },
+            // 94
+            {
+                q: "¿Qué objetivo persigue la técnica preventiva de la higiene industrial frente a una enfermedad profesional en gestación?",
+                options: [
+                    "Modificar y controlar el ambiente de trabajo para que los contaminantes no superen los límites tolerables.",
+                    "Despedir al trabajador afectado antes de que acuda al médico.",
+                    "Sustituir la medicación farmacéutica por remedios caseros.",
+                    "Incrementar el ritmo de producción de la cadena."
+                ],
+                correct: 0,
+                exp: "La higiene industrial valora y modifica los agentes ambientales para prevenir enfermedades profesionales[cite: 39]."
+            },
+            // 95
+            {
+                q: "¿Qué se debe comprobar obligatoriamente en un EPI antes de adquirirlo y entregarlo a un trabajador en la Unión Europea?",
+                options: [
+                    "Que disponga del folleto informativo del fabricante y lleve de forma visible el marcado CE.",
+                    "Que su color coincida exactamente con el logo de la empresa.",
+                    "Que haya sido fabricado exclusivamente en el municipio local.",
+                    "Que su precio sea el más económico del mercado sin importar homologación."
+                ],
+                correct: 0,
+                exp: "Todo EPI debe contar con marcado CE y folleto informativo del fabricante[cite: 42]."
+            },
+            // 96
+            {
+                q: "¿Qué principio de la acción preventiva aborda directamente la modificación de tareas monótonas o excesivamente repetitivas?",
+                options: [
+                    "Adaptar el trabajo a la persona y combatir los riesgos derivados de la organización (ergonomía y psicosociología).",
+                    "Sustituir los equipos mecánicos por otros más potentes.",
+                    "Aumentar la presión temporal de entrega de los pedidos.",
+                    "Exigir horas extraordinarias obligatorias."
+                ],
+                correct: 0,
+                exp: "Adaptar el trabajo y evitar la monotonía previene la fatiga mental y la insatisfacción[cite: 38, 39]."
+            },
+            // 97
+            {
+                q: "¿Qué sanción o consecuencia jurídica puede acarrear para un empresario el incumplimiento grave de las obligaciones en materia de EPIs y protección?",
+                options: [
+                    "Responsabilidades administrativas con multas e incluso recargo de prestaciones en caso de accidente, sin perjuicio de responsabilidades penales.",
+                    "Una simple amonestación verbal privada sin consecuencias.",
+                    "La pérdida temporal del carnet de conducir del director.",
+                    "La exención total de cotizar a la seguridad social."
+                ],
+                correct: 0,
+                exp: "El incumplimiento de medidas preventivas conlleva sanciones en el orden social, recargo de prestaciones y responsabilidades legales."
+            },
+            // 98
+            {
+                q: "¿Qué es una barrera de protección térmica en los procesos industriales?",
+                options: [
+                    "Una medida de protección colectiva para mantener una temperatura adecuada sin poner en riesgo la salud.",
+                    "Un guante ignífugo de categoría III.",
+                    "Una señal acústica de aviso por calor extremo.",
+                    "Un sistema de aire acondicionado doméstico portátil."
+                ],
+                correct: 0,
+                exp: "Las barreras de protección térmica proporcionan una temperatura adecuada en el entorno de trabajo[cite: 46]."
+            },
+            // 99
+            {
+                q: "¿Por qué la señalización de seguridad nunca debe ser el único recurso preventivo en un punto de máximo peligro?",
+                options: [
+                    "Porque la señal solo advierte o informa, pero no elimina ni reduce físicamente el peligro mecánico o ambiental subyacente.",
+                    "Porque las señales se apagan solas por la noche.",
+                    "Porque los trabajadores no saben leer los pictogramas universales.",
+                    "Porque la normativa prohíbe usar carteles en las paredes de las fábricas."
+                ],
+                correct: 0,
+                exp: "La señalización complementa pero no elimina el riesgo técnico por sí misma[cite: 40, 46, 50]."
+            },
+            // 100
+            {
+                q: "¿Qué organismo y normativa regula de forma específica los requisitos mínimos de comercialización y conformidad de los EPIs?",
+                options: [
+                    "El Real Decreto 773/1997 sobre disposiciones mínimas de seguridad y salud relativas a la utilización por los trabajadores de equipos de protección individual.",
+                    "El Código Penal en su artículo 316.",
+                    "La Ley General de Sanidad de 1986.",
+                    "El Reglamento General de Circulación vial."
+                ],
+                correct: 0,
+                exp: "El RD 773/1997 regula específicamente la utilización de los EPIs en el ámbito laboral[cite: 41]."
+            }
+        ];
+
+        let currentQuizQuestions = [];
+        let currentIndex = 0;
+        let score = 0;
+        let selectedOption = null;
+        let isAnswered = false;
+
+        function startQuiz() {
+            const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+            let numQuestions = parseInt(selectedMode);
+
+            // Mezclar y recortar preguntas
+            let shuffled = [...fullQuestionBank].sort(() => 0.5 - Math.random());
+            currentQuizQuestions = shuffled.slice(0, numQuestions);
+
+            currentIndex = 0;
+            score = 0;
+
+            document.getElementById('screen-welcome').classList.add('hidden');
+            document.getElementById('screen-results').classList.add('hidden');
+            document.getElementById('screen-quiz').classList.remove('hidden');
+            document.getElementById('badge-container').classList.remove('hidden');
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            isAnswered = false;
+            selectedOption = null;
+            document.getElementById('btn-next').classList.add('hidden');
+            document.getElementById('feedback-box').classList.add('hidden');
+
+            const q = currentQuizQuestions[currentIndex];
+            const total = currentQuizQuestions.length;
+
+            document.getElementById('question-counter').innerText = `Pregunta ${currentIndex + 1} de ${total}`;
+            const percent = Math.round(((currentIndex) / total) * 100);
+            document.getElementById('progress-percent').innerText = `${percent}%`;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+            document.getElementById('score-badge').innerText = `Puntuación: ${score} / ${currentIndex}`;
+
+            document.getElementById('question-text').innerText = q.q;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 hover:bg-slate-700/50 hover:border-indigo-500/50 transition font-medium text-sm sm:text-base text-slate-200 cursor-pointer flex items-start gap-3";
+                btn.innerHTML = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-slate-800 text-xs font-bold text-slate-400 shrink-0 border border-slate-700">${String.fromCharCode(65 + idx)}</span> <span>${opt}</span>`;
+                btn.onclick = () => selectOption(idx, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(idx, btnElement) {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            const q = currentQuizQuestions[currentIndex];
+            selectedOption = idx;
+
+            const optionsContainer = document.getElementById('options-container');
+            const buttons = optionsContainer.children;
+
+            if (idx === q.correct) {
+                score++;
+                btnElement.classList.remove('bg-slate-900/60', 'border-slate-700/60');
+                btnElement.classList.add('bg-teal-950/80', 'border-teal-500', 'text-teal-200');
+            } else {
+                btnElement.classList.remove('bg-slate-900/60', 'border-slate-700/60');
+                btnElement.classList.add('bg-rose-950/80', 'border-rose-500', 'text-rose-200');
+                // Marcar la correcta
+                buttons[q.correct].classList.remove('bg-slate-900/60', 'border-slate-700/60');
+                buttons[q.correct].classList.add('bg-teal-950/80', 'border-teal-500', 'text-teal-200');
+            }
+
+            // Mostrar feedback
+            const feedbackBox = document.getElementById('feedback-box');
+            feedbackBox.classList.remove('hidden');
+            if (idx === q.correct) {
+                feedbackBox.className = "p-4 rounded-xl mb-6 text-sm border bg-teal-950/40 border-teal-500/40 text-teal-200";
+                feedbackBox.innerHTML = `<strong>¡Correcto!</strong> ${q.exp}`;
+            } else {
+                feedbackBox.className = "p-4 rounded-xl mb-6 text-sm border bg-rose-950/40 border-rose-500/40 text-rose-200";
+                feedbackBox.innerHTML = `<strong>Incorrecto.</strong> ${q.exp}`;
+            }
+
+            document.getElementById('score-badge').innerText = `Puntuación: ${score} / ${currentIndex + 1}`;
+            document.getElementById('btn-next').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentIndex++;
+            if (currentIndex < currentQuizQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('screen-quiz').classList.add('hidden');
+            document.getElementById('badge-container').classList.add('hidden');
+            document.getElementById('screen-results').classList.remove('hidden');
+
+            const total = currentQuizQuestions.length;
+            const percent = Math.round((score / total) * 100);
+
+            document.getElementById('final-score').innerText = `${score} / ${total}`;
+            document.getElementById('final-percentage').innerText = `${percent}% de aciertos`;
+
+            const msg = document.getElementById('result-message');
+            if (percent >= 90) {
+                msg.innerText = "¡Excelente nivel! Dominas a la perfección todo el Tema 3 de FOL.";
+            } else if (percent >= 70) {
+                msg.innerText = "¡Muy buen trabajo! Tienes una sólida base sobre las medidas de prevención y protección.";
+            } else if (percent >= 50) {
+                msg.innerText = "Buen intento, pero conviene repasar algunos apartados de principios preventivos, EPIs o señalización.";
+            } else {
+                msg.innerText = "Es recomendable volver a repasar los apuntes del tema para afianzar los conceptos clave.";
+            }
+        }
+
+        function restartQuiz() {
+            document.getElementById('screen-quiz').classList.add('hidden');
+            document.getElementById('screen-results').classList.add('hidden');
+            document.getElementById('badge-container').classList.add('hidden');
+            document.getElementById('screen-welcome').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
